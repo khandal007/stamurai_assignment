@@ -1,0 +1,96 @@
+<div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">User List</h4>
+                  <p class="card-category"> List of registered users</p>
+                </div>
+                <div class="card-body">
+                  <div style="padding-left: 88%;">
+                  <a href="/addUser" class="btn btn-primary pull-right">Add User</a>
+                </div>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                        <tr>
+                          <th></th>
+                          <th>Sr No.</th>
+                          <th>Name</th>
+                          <th>E-mail</th>
+                          <th>Mobile</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <%userList.map(function(data, i){%>
+                        <tr>
+                          <td><%if(session.user_role==55){%>
+                            <a title="Assign" onclick="assign(<%=data.id%>)"><i class="fa fa-pencil"></i></a></td>
+                            <%}%>
+                          <td><%=i+1%></td>
+                          <td><%=data.first_name%> <%=data.last_name%></td>
+                          <td><%=data.email%></td>
+                          <td class="text-primary"><%=data.mobile%></td>
+                        </tr>
+                        <%})%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="assign" tabindex="-1" role="dialog" aria-labelledby="assign" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="assign">Assign Reviewer</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                      <form>
+                    <div class="modal-body">
+                        <div class="row">
+                          <input type="hidden" id="user_id" value="">
+                          <div class="col-sm-6">
+                            <label>Reviewers</label>
+                            <select id="reviewer" class="form-control">
+                              <%reviewerList.map(function(allTyp,atp){ %>
+                                <option value="<%=allTyp.id%>"><%=allTyp.first_name%></option>
+                              <%})%>
+                            </select>
+                          </div>
+                     
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" onclick="saveReviewer()">Save & Close</button>
+                    </div>
+                     </form>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+<script type="text/javascript">
+  function assign(user_id){
+    $("#user_id").val(user_id);
+    $('#assign').modal('toggle');
+   }
+
+   function saveReviewer(){
+    var token = $.cookie("token");
+      $.ajax({
+        type: "POST",
+          url: '/assignReviewer',
+          data: {user_id: $("#user_id").val(), reviewer_id:$("#reviewer").val()},
+          beforeSend: function(xhr){xhr.setRequestHeader('authorization', token);},
+          datatype:'json',
+          success: function (res) {
+            $('#assign').modal('toggle');
+            if(res.status==false){
+              alert("Access Already given");
+            }
+          }
+      });
+    }
+</script>

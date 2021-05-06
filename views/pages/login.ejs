@@ -1,0 +1,71 @@
+<html lang="en">
+<style>
+.center {
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+  padding-left: 186px;
+    padding-top: 145px;
+}
+</style>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Stamurai</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+  <link href="assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="row center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Login Form</h4>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group bmd-form-group">
+                          <label>Email</label>
+                          <input type="text" id="email" class="form-control" required="">
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group bmd-form-group">
+                          <label>Password</label>
+                          <input type="password" id="password" class="form-control" required="">
+                        </div>
+                      </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary pull-right" onclick="doLogin()">LOGIN</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+<script type="text/javascript">
+function doLogin(){
+  $.ajax({
+      type: "PUT",
+        url: '/doLogin',
+        data: {email: $("#email").val(), password: $('#password').val()},
+        datatype:'json',
+        success: function (res) {
+        	if(res.status){
+            window.location.href = '/userList';
+            $.cookie('token',res.token);
+            $.cookie('user_role',res.userData.user_role);
+        	}else{
+        		alert(res.message);
+        	}
+        }
+      });
+}
+</script>
+</html>

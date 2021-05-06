@@ -1,0 +1,77 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Add User</h4>
+                  <p class="card-category">Complete the profile</p>
+                </div>
+                <div class="card-body">
+                  <form id="addUser" method="POST">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group bmd-form-group">
+                          <label>First Name</label>
+                          <input type="text" name="first_name" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group bmd-form-group">
+                          <label>Last Name</label>
+                          <input type="text" name="last_name"  class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group bmd-form-group">
+                          <label>Email address</label>
+                          <input type="email" name="user_email" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group bmd-form-group">
+                          <label>Password</label>
+                          <input type="password" name="password" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group bmd-form-group">
+                          <label>Mobile</label>
+                          <input type="text" name="mobile" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+	$("#addUser").submit(function(e){
+	  e.preventDefault();
+	  var r = confirm("Are you Sure!");
+	  if (r == true) {
+	  	var ajaxData = $("#addUser").serialize();
+      var token = $.cookie("token");
+	  $.ajax({
+	    type: "POST",
+	      url: '/createUser',
+	      data: ajaxData,
+	      datatype:'json',
+        beforeSend: function(xhr){xhr.setRequestHeader('authorization', token);},
+	      success: function (res) {
+          location.replace("/userList");
+	      }
+	    });
+	  } else {
+	    return false;
+	  }
+	});
+})
+</script>
