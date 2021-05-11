@@ -1,11 +1,11 @@
 # stamurai_assignment
 This project is built on
 
-Language -> Javascript
-Web Framework -> Express.js, Node.js
-ORM -> Sequelize
-Database -> MySQL
-Frontend -> HTML, CSS, Javascript, JQuery, EJS
+  Language -> Javascript
+  Web Framework -> Express.js, Node.js
+  ORM -> Sequelize
+  Database -> MySQL
+  Frontend -> HTML, CSS, Javascript, JQuery, EJS
 
 Steps for Installation:-
 
