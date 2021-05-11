@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                   <div style="padding-left: 88%;">
-                  <a href="/addUser" class="btn btn-primary pull-right">Add User</a>
+                  
                 </div>
                   <div class="table-responsive">
                     <table class="table">
@@ -78,7 +78,7 @@
    }
 
    function saveReviewer(){
-    var token = $.cookie("token");
+    var token = $.cookie('token');
       $.ajax({
         type: "POST",
           url: '/assignReviewer',

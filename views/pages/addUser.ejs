@@ -1,4 +1,3 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
           <div class="row">
             <div class="col-md-8">
               <div class="card">
@@ -58,7 +57,7 @@
 	  var r = confirm("Are you Sure!");
 	  if (r == true) {
 	  	var ajaxData = $("#addUser").serialize();
-      var token = $.cookie("token");
+      var token = $.cookie('token');
 	  $.ajax({
 	    type: "POST",
 	      url: '/createUser',

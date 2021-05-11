@@ -27,10 +27,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-let RedisStore = require('connect-redis')(session)
-let redisClient = redis.createClient()
+// let RedisStore = require('connect-redis')(session)
+// let redisClient = redis.createClient()
 
-app.use(session({store: new RedisStore({ client: redisClient }), resave: false,secret: "Shh, its a secret!", expires: new Date(Date.now() + (30 * 86400 * 1000))}));
+app.use(session({ resave: false,secret: "Shh, its a secret!", expires: new Date(Date.now() + (30 * 86400 * 1000))}));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -60,7 +60,7 @@ app.use(function(err, req, res, next) {
 
 var Sequelize = require('sequelize');
 app.locals.sequelize = new Sequelize('stamurai', 'himanshuser', 'himanshpass', {
-  host: 'stamurai',
+  host: 'mysql',
   dialect: 'mysql',
   pool: {
     max: 5,

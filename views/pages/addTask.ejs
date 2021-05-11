@@ -42,7 +42,7 @@
 	  e.preventDefault();
 	  var r = confirm("Are you Sure!");
 	  if (r == true) {
-      var token = $.cookie("token");
+      var token = $.cookie('token');
 	  	var ajaxData = $("#addUser").serialize();
 	  $.ajax({
 	    type: "POST",

@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                   <div style="padding-left: 88%;">
-                  <a href="/addUser" class="btn btn-primary pull-right">Add Task</a>
+                  <a href="/createTaskPage" class="btn btn-primary pull-right">Add Task</a>
                 </div>
                   <div class="table-responsive">
                     <table class="table">
@@ -52,7 +52,7 @@
             }else{
               var x = 2;
             }
-            var token = $.cookie("token");
+            var token = $.cookie('token');
             $.ajax({
               type: "PUT",
                 url: '/changeTaskStatus',
